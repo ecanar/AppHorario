@@ -11,7 +11,7 @@ import Calendario from './pages/Calendario'
 export default function App() {
   return (
     <AppProvider>
-      <BrowserRouter>
+      <BrowserRouter basename="/AppHorario">
         <Routes>
           <Route path="/" element={<Layout />}>
             <Route index element={<Navigate to="/dashboard" replace />} />
