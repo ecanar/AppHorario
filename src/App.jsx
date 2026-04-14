@@ -1,4 +1,4 @@
-import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom'
+import { HashRouter, Routes, Route, Navigate } from 'react-router-dom'
 import { AppProvider } from './context/AppContext'
 import Layout from './components/Layout'
 import Dashboard from './pages/Dashboard'
@@ -11,7 +11,7 @@ import Calendario from './pages/Calendario'
 export default function App() {
   return (
     <AppProvider>
-      <BrowserRouter basename="/AppHorario">
+      <HashRouter>
         <Routes>
           <Route path="/" element={<Layout />}>
             <Route index element={<Navigate to="/dashboard" replace />} />
@@ -23,7 +23,7 @@ export default function App() {
             <Route path="calendario" element={<Calendario />} />
           </Route>
         </Routes>
-      </BrowserRouter>
+      </HashRouter>
     </AppProvider>
   )
 }
