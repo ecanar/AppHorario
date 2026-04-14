@@ -31,11 +31,7 @@ app.use((err, _req, res, _next) => {
 
 const PORT = process.env.PORT || 3000
 
-initDB()
-  .then(() => {
-    app.listen(PORT, () => console.log(`Server running on port ${PORT}`))
-  })
-  .catch((err) => {
-    console.error('DB init failed:', err)
-    process.exit(1)
-  })
+app.listen(PORT, () => {
+  console.log(`Server running on port ${PORT}`)
+  initDB().catch((err) => console.error('DB init error:', err))
+})
