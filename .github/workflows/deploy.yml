@@ -31,6 +31,8 @@ jobs:
 
       - name: Build
         run: npm run build
+        env:
+          VITE_API_URL: https://apphorario-production.up.railway.app
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
