@@ -14,7 +14,7 @@ app.use(cors({
     
     const allowedOrigins = [
       'http://localhost:5173',
-      'https://apphorario-production.up.railway.app',
+      'https://horario.up.railway.app',
       process.env.FRONTEND_URL,
     ].filter(Boolean)
     
