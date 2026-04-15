@@ -7,6 +7,7 @@ const toClient = (row) => ({
   apellido: row.apellido,
   puestoId: row.puesto_id,
   telefono: row.telefono,
+  alias: row.alias,
   activo: row.activo,
 })
 
@@ -18,22 +19,22 @@ router.get('/', async (_req, res, next) => {
 })
 
 router.post('/', async (req, res, next) => {
-  const { id, nombre, apellido, puestoId = null, telefono = '', activo = true } = req.body
+  const { id, nombre, apellido, puestoId = null, telefono = '', alias = '', activo = true } = req.body
   try {
     const { rows } = await pool.query(
-      'INSERT INTO empleados (id, nombre, apellido, puesto_id, telefono, activo) VALUES ($1, $2, $3, $4, $5, $6) RETURNING *',
-      [id, nombre, apellido, puestoId || null, telefono, activo]
+      'INSERT INTO empleados (id, nombre, apellido, puesto_id, telefono, alias, activo) VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING *',
+      [id, nombre, apellido, puestoId || null, telefono, alias, activo]
     )
     res.json(toClient(rows[0]))
   } catch (err) { next(err) }
 })
 
 router.put('/:id', async (req, res, next) => {
-  const { nombre, apellido, puestoId = null, telefono = '', activo = true } = req.body
+  const { nombre, apellido, puestoId = null, telefono = '', alias = '', activo = true } = req.body
   try {
     const { rows } = await pool.query(
-      'UPDATE empleados SET nombre=$1, apellido=$2, puesto_id=$3, telefono=$4, activo=$5 WHERE id=$6 RETURNING *',
-      [nombre, apellido, puestoId || null, telefono, activo, req.params.id]
+      'UPDATE empleados SET nombre=$1, apellido=$2, puesto_id=$3, telefono=$4, alias=$5, activo=$6 WHERE id=$7 RETURNING *',
+      [nombre, apellido, puestoId || null, telefono, alias, activo, req.params.id]
     )
     res.json(toClient(rows[0]))
   } catch (err) { next(err) }

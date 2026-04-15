@@ -3,7 +3,7 @@ import { useApp } from '../context/AppContext'
 import Modal from '../components/Modal'
 import { Plus, Pencil, Trash2, Users } from 'lucide-react'
 
-const EMPTY = { nombre: '', apellido: '', puestoId: '', telefono: '', activo: true }
+const EMPTY = { nombre: '', apellido: '', alias: '', puestoId: '', telefono: '', activo: true }
 
 export default function Empleados() {
   const { state, dispatch, genId } = useApp()
@@ -71,6 +71,7 @@ export default function Empleados() {
                 <tr className="border-b border-gray-200 bg-gray-50">
                   <th className="text-left text-xs font-medium text-gray-500 uppercase tracking-wide px-4 py-3">Empleado</th>
                   <th className="text-left text-xs font-medium text-gray-500 uppercase tracking-wide px-4 py-3 hidden sm:table-cell">Puesto</th>
+                  <th className="text-left text-xs font-medium text-gray-500 uppercase tracking-wide px-4 py-3 hidden md:table-cell">Alias</th>
                   <th className="text-left text-xs font-medium text-gray-500 uppercase tracking-wide px-4 py-3 hidden md:table-cell">Teléfono</th>
                   <th className="text-left text-xs font-medium text-gray-500 uppercase tracking-wide px-4 py-3">Estado</th>
                   <th className="text-right text-xs font-medium text-gray-500 uppercase tracking-wide px-4 py-3">Acciones</th>
@@ -94,6 +95,7 @@ export default function Empleados() {
                         </div>
                       </td>
                       <td className="px-4 py-3 text-sm text-gray-600 hidden sm:table-cell">{puesto?.nombre || '—'}</td>
+                      <td className="px-4 py-3 text-sm text-gray-500 hidden md:table-cell">{emp.alias || '—'}</td>
                       <td className="px-4 py-3 text-sm text-gray-500 hidden md:table-cell">{emp.telefono || '—'}</td>
                       <td className="px-4 py-3">
                         <span className={`inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium ${
@@ -144,6 +146,16 @@ export default function Empleados() {
                   className="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                 />
               </div>
+            </div>
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-1">Alias</label>
+              <input
+                type="text"
+                value={modal.data.alias}
+                onChange={e => setModal(m => ({ ...m, data: { ...m.data, alias: e.target.value } }))}
+                className="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                placeholder="Ej: Juanito"
+              />
             </div>
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-1">Puesto</label>

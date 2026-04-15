@@ -27,6 +27,7 @@ async function initDB() {
       apellido VARCHAR(100) NOT NULL,
       puesto_id VARCHAR(60),
       telefono VARCHAR(50) DEFAULT '',
+      alias VARCHAR(100) DEFAULT '',
       activo BOOLEAN DEFAULT TRUE
     );
 
@@ -37,6 +38,9 @@ async function initDB() {
       fecha DATE NOT NULL,
       UNIQUE(empleado_id, fecha)
     );
+  `)
+  await pool.query(`
+    ALTER TABLE empleados ADD COLUMN IF NOT EXISTS alias VARCHAR(100) DEFAULT '';
   `)
   console.log('Database initialized')
 }
