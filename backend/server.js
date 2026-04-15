@@ -26,7 +26,10 @@ app.use('/api/asignaciones', require('./routes/asignaciones'))
 app.get('/health', (_req, res) => res.json({ status: 'ok' }))
 
 // Servir frontend compilado
-const distPath = path.join(__dirname, '../dist')
+const distPath = path.join(process.cwd(), 'dist')
+console.log('__dirname:', __dirname)
+console.log('process.cwd():', process.cwd())
+console.log('distPath:', distPath)
 app.use(express.static(distPath))
 app.get('*', (_req, res) => res.sendFile(path.join(distPath, 'index.html')))
 
