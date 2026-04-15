@@ -1,5 +1,6 @@
 const express = require('express')
 const cors = require('cors')
+const path = require('path')
 require('dotenv').config()
 
 const { initDB } = require('./db')
@@ -23,6 +24,11 @@ app.use('/api/empleados', require('./routes/empleados'))
 app.use('/api/asignaciones', require('./routes/asignaciones'))
 
 app.get('/health', (_req, res) => res.json({ status: 'ok' }))
+
+// Servir frontend compilado
+const distPath = path.join(__dirname, '../dist')
+app.use(express.static(distPath))
+app.get('*', (_req, res) => res.sendFile(path.join(distPath, 'index.html')))
 
 app.use((err, _req, res, _next) => {
   console.error(err)
