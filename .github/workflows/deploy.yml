@@ -1,38 +1,4 @@
-name: Build frontend y commitear dist
-
-on:
-  push:
-    branches: [master]
-  workflow_dispatch:
-
-permissions:
-  contents: write
-
-jobs:
-  build:
-    runs-on: ubuntu-latest
-    if: github.actor != 'github-actions[bot]'
-    steps:
-      - uses: actions/checkout@v4
-        with:
-          token: ${{ secrets.GITHUB_TOKEN }}
-
-      - name: Setup Node
-        uses: actions/setup-node@v4
-        with:
-          node-version: 20
-          cache: npm
-
-      - name: Install dependencies
-        run: npm install
-
-      - name: Build
-        run: npm run build
-
-      - name: Commit dist
-        run: |
-          git config user.name "github-actions[bot]"
-          git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add -f dist/
-          git diff --staged --quiet || git commit -m "chore: build frontend"
-          git push
+# ELIMINADO: Este workflow ya no es necesario
+# El proyecto ahora se despliega completamente en Railway
+# Railway construye el frontend y el backend automáticamente
+# usando nixpacks.toml

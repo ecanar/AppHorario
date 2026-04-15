@@ -8,11 +8,22 @@ const { initDB } = require('./db')
 const app = express()
 
 app.use(cors({
-  origin: [
-    'https://ecanar.github.io',
-    'http://localhost:5173',
-    process.env.FRONTEND_URL,
-  ].filter(Boolean),
+  origin: function (origin, callback) {
+    // Permitir requests sin origin (como mobile apps, curl, etc)
+    if (!origin) return callback(null, true)
+    
+    const allowedOrigins = [
+      'http://localhost:5173',
+      'https://apphorario-production.up.railway.app',
+      process.env.FRONTEND_URL,
+    ].filter(Boolean)
+    
+    if (allowedOrigins.includes(origin)) {
+      callback(null, true)
+    } else {
+      callback(new Error('Not allowed by CORS'))
+    }
+  },
   credentials: true,
 }))
 
