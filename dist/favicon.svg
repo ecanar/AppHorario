@@ -1,0 +1,39 @@
+﻿<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <clipPath id="circle"><circle cx="256" cy="256" r="256"/></clipPath>
+  </defs>
+  <!-- Background circle -->
+  <circle cx="256" cy="256" r="256" fill="#FFC107"/>
+  <!-- Drop shadow overlay on right side -->
+  <path d="M256 148 L392 148 L392 395 L280 440 L256 420 Z" fill="#E6A800" opacity="0.45" clip-path="url(#circle)"/>
+  <!-- Calendar body white -->
+  <rect x="108" y="158" width="296" height="228" rx="14" fill="white"/>
+  <!-- Calendar body right half cream -->
+  <rect x="256" y="158" width="148" height="228" rx="0" fill="#F5E6C0"/>
+  <rect x="390" y="158" width="14" height="228" rx="0" fill="#F5E6C0"/>
+  <!-- Fix right rounded corners -->
+  <rect x="256" y="158" width="136" height="228" fill="#F5E6C0"/>
+  <!-- Rounded right edge -->
+  <rect x="380" y="158" width="24" height="228" rx="14" fill="#F5E6C0"/>
+  <!-- Top red bar -->
+  <rect x="108" y="158" width="296" height="68" rx="14" fill="#BF3A2B"/>
+  <rect x="108" y="196" width="296" height="30" fill="#BF3A2B"/>
+  <!-- Calendar hooks/rings -->
+  <rect x="178" y="130" width="26" height="52" rx="9" fill="white"/>
+  <rect x="308" y="130" width="26" height="52" rx="9" fill="white"/>
+  <!-- Dots row 1 -->
+  <circle cx="163" cy="272" r="16" fill="#FFC107"/>
+  <circle cx="214" cy="272" r="16" fill="#FFC107"/>
+  <circle cx="265" cy="272" r="16" fill="#FFC107"/>
+  <circle cx="316" cy="272" r="16" fill="#FFC107"/>
+  <!-- Dots row 2 -->
+  <circle cx="163" cy="321" r="16" fill="#FFC107"/>
+  <circle cx="214" cy="321" r="16" fill="#FFC107"/>
+  <circle cx="265" cy="321" r="16" fill="#FFC107"/>
+  <circle cx="316" cy="321" r="16" fill="#FFC107"/>
+  <!-- Dots row 3 -->
+  <circle cx="163" cy="370" r="16" fill="#FFC107"/>
+  <circle cx="214" cy="370" r="16" fill="#FFC107"/>
+  <circle cx="265" cy="370" r="16" fill="#FFC107"/>
+  <circle cx="316" cy="370" r="16" fill="#FFC107"/>
+</svg>
