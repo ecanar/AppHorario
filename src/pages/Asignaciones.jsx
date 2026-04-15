@@ -1,4 +1,4 @@
-import { useState, useMemo } from 'react'
+import { useState, useMemo, useEffect } from 'react'
 import { useApp } from '../context/AppContext'
 import Modal from '../components/Modal'
 import { ChevronLeft, ChevronRight, CalendarRange, RotateCcw } from 'lucide-react'
@@ -24,12 +24,16 @@ function dateStr(d) {
 const DAYS = ['Lun', 'Mar', 'Mié', 'Jue', 'Vie', 'Sáb', 'Dom']
 
 export default function Asignaciones() {
-  const { state, dispatch, genId } = useApp()
+  const { state, dispatch, genId, loadAsignaciones } = useApp()
   const [weekStart, setWeekStart] = useState(() => getWeekStart(new Date()))
   const [modal, setModal] = useState(null)
 
   const weekDays = useMemo(() => Array.from({ length: 7 }, (_, i) => addDays(weekStart, i)), [weekStart])
   const today = dateStr(new Date())
+
+  useEffect(() => {
+    loadAsignaciones(dateStr(weekStart), dateStr(addDays(weekStart, 6)))
+  }, [weekStart, loadAsignaciones])
 
   const empleadosActivos = state.empleados.filter(e => e.activo)
 

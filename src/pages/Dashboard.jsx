@@ -1,4 +1,4 @@
-import { useMemo } from 'react'
+import { useMemo, useEffect } from 'react'
 import { useApp } from '../context/AppContext'
 import { Users, Building2, Briefcase, CalendarCheck, TrendingUp } from 'lucide-react'
 
@@ -16,11 +16,17 @@ function getWeekDates() {
 }
 
 export default function Dashboard() {
-  const { state } = useApp()
+  const { state, loadAsignaciones } = useApp()
   const { empleados, sucursales, puestos, asignaciones } = state
 
   const weekDates = useMemo(() => getWeekDates(), [])
   const today = new Date().toISOString().split('T')[0]
+
+  useEffect(() => {
+    if (weekDates.length) {
+      loadAsignaciones(weekDates[0], weekDates[weekDates.length - 1])
+    }
+  }, [weekDates, loadAsignaciones])
 
   const empleadosActivos = empleados.filter(e => e.activo).length
   const asignSemana = asignaciones.filter(a => weekDates.includes(a.fecha)).length

@@ -1,4 +1,4 @@
-import { useState, useMemo } from 'react'
+import { useState, useMemo, useEffect } from 'react'
 import { useApp } from '../context/AppContext'
 import { ChevronLeft, ChevronRight, Calendar, RotateCcw } from 'lucide-react'
 
@@ -24,13 +24,17 @@ const DAYS_FULL = ['Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábad
 const DAYS_SHORT = ['Lun', 'Mar', 'Mié', 'Jue', 'Vie', 'Sáb', 'Dom']
 
 export default function Calendario() {
-  const { state } = useApp()
+  const { state, loadAsignaciones } = useApp()
   const [weekStart, setWeekStart] = useState(() => getWeekStart(new Date()))
   const [sucursalId, setSucursalId] = useState(state.sucursales[0]?.id || '')
   const [view, setView] = useState('week')
 
   const weekDays = useMemo(() => Array.from({ length: 7 }, (_, i) => addDays(weekStart, i)), [weekStart])
   const today = dateStr(new Date())
+
+  useEffect(() => {
+    loadAsignaciones(dateStr(weekStart), dateStr(addDays(weekStart, 6)))
+  }, [weekStart, loadAsignaciones])
 
   const sucursal = state.sucursales.find(s => s.id === sucursalId)
 
