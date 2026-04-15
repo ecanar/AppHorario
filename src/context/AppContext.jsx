@@ -47,7 +47,7 @@ export function AppProvider({ children }) {
   useEffect(() => {
     Promise.all([api.getPuestos(), api.getSucursales(), api.getEmpleados()])
       .then(([puestos, sucursales, empleados]) => {
-        localDispatch({ type: 'LOAD', payload: { puestos, sucursales, empleados, asignaciones: [] } })
+        localDispatch({ type: 'LOAD', payload: { puestos, sucursales, empleados } })
       })
       .catch((err) => {
         console.error('Error loading data:', err)
