@@ -42,11 +42,31 @@ const distPath = [
   path.join(process.cwd(), 'dist'),
   path.join(__dirname, '../dist'),
   '/app/dist',
-].find(p => fs.existsSync(path.join(p, 'index.html')))
-console.log('distPath encontrado:', distPath)
+  '/opt/app/dist',
+  path.join('/app', 'dist'),
+].find(p => {
+  const testPath = path.join(p, 'index.html')
+  const exists = fs.existsSync(testPath)
+  if (exists) console.log('distPath encontrado:', p)
+  return exists
+})
+
+console.log('Buscando distPath en:', [
+  path.join(process.cwd(), 'dist'),
+  path.join(__dirname, '../dist'),
+  '/app/dist',
+  '/opt/app/dist',
+  path.join('/app', 'dist'),
+])
+
 if (distPath) {
+  console.log('Sirviendo frontend desde:', distPath)
   app.use(express.static(distPath))
   app.get('*', (_req, res) => res.sendFile(path.join(distPath, 'index.html')))
+} else {
+  console.error('ERROR: No se encontró dist/index.html en ninguna ubicación')
+  console.error('Directorio actual:', process.cwd())
+  console.error('__dirname:', __dirname)
 }
 
 app.use((err, _req, res, _next) => {

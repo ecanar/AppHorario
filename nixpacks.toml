@@ -2,7 +2,7 @@
 cmds = ["npm install --include=dev"]
 
 [phases.build]
-cmds = ["npm run build", "npm install --prefix backend"]
+cmds = ["npm run build", "ls -la dist", "npm install --prefix backend"]
 
 [start]
 cmd = "node backend/server.js"
