@@ -127,30 +127,24 @@ export default function Calendario() {
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-7 gap-3">
         {weekDays.map((d, i) => {
           const fecha = dateStr(d)
-          const isT = fecha === today
           const empleados = getEmpleadosDia(d)
 
           return (
             <div
               key={fecha}
-              className={`bg-white rounded-xl border overflow-hidden flex flex-col transition-shadow ${
-                isT ? 'border-blue-400 shadow-md shadow-blue-100' : 'border-gray-200 hover:shadow-sm'
-              }`}
+              className="bg-white rounded-xl border border-gray-200 overflow-hidden flex flex-col transition-shadow hover:shadow-sm"
             >
               <div
-                className={`px-3 py-2.5 shrink-0 ${isT ? 'text-white' : ''}`}
-                style={isT
-                  ? { backgroundColor: sucursal?.color || '#3B82F6' }
-                  : { borderBottom: `3px solid ${sucursal?.color || '#3B82F6'}20`, backgroundColor: '#F9FAFB' }
-                }
+                className="px-3 py-2.5 shrink-0"
+                style={{ borderBottom: `3px solid ${sucursal?.color || '#3B82F6'}20`, backgroundColor: '#F9FAFB' }}
               >
-                <p className={`text-xs font-semibold uppercase tracking-wide ${isT ? 'text-white/80' : 'text-gray-400'}`}>
+                <p className="text-xs font-semibold uppercase tracking-wide text-gray-400">
                   <span className="hidden lg:block">{DAYS_FULL[i]}</span>
                   <span className="lg:hidden">{DAYS_SHORT[i]}</span>
                 </p>
-                <p className={`text-2xl font-bold leading-tight ${isT ? 'text-white' : 'text-gray-800'}`}>
+                <p className="text-2xl font-bold leading-tight text-gray-800">
                   {d.getDate()}
-                  <span className={`text-sm font-normal ml-1 ${isT ? 'text-white/70' : 'text-gray-400'}`}>
+                  <span className="text-sm font-normal ml-1 text-gray-400">
                     {d.toLocaleDateString('es-ES', { month: 'short' })}
                   </span>
                 </p>
