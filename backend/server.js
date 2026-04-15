@@ -1,5 +1,14 @@
+console.log('=== SERVER STARTING ===')
+console.log('NODE_ENV:', process.env.NODE_ENV)
+console.log('PORT:', process.env.PORT)
+console.log('DATABASE_URL:', process.env.DATABASE_URL ? 'SET' : 'NOT SET')
+console.log('CWD:', process.cwd())
+console.log('__dirname:', __dirname)
+
 const express = require('express')
+console.log('express loaded')
 const cors = require('cors')
+console.log('cors loaded')
 const path = require('path')
 require('dotenv').config()
 
